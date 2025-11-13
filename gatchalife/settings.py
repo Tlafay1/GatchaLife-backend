@@ -71,7 +71,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "gatchalife.wsgi.application"
 
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = "./gatchalife/personnal-apps-415107-6e84f4ea6b02.json"
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = (
+    "./gatchalife/personnal-apps-415107-6e84f4ea6b02.json"
+)
 
 
 # Database
