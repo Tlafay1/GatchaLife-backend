@@ -8,8 +8,9 @@ from drf_yasg import openapi
 
 from gatchalife.character.views import (
     CharacterViewSet,
-    VariantViewSet,
-    AttachmentViewSet,
+    CharacterVariantViewSet,
+    VariantReferenceImageViewSet,
+    SeriesViewSet,
 )
 
 schema_view = get_schema_view(
@@ -26,9 +27,10 @@ schema_view = get_schema_view(
 )
 
 router = routers.DefaultRouter()
-router.register(r"characters", CharacterViewSet)
-router.register(r"variants", VariantViewSet)
-router.register(r"attachments", AttachmentViewSet)
+router.register(r'series', SeriesViewSet)             # /api/series/
+router.register(r'characters', CharacterViewSet)      # /api/characters/
+router.register(r'variants', CharacterVariantViewSet) # /api/variants/
+router.register(r'variant-images', VariantReferenceImageViewSet) # /api/variant-images/
 
 urlpatterns = [
     path("admin/", admin.site.urls),

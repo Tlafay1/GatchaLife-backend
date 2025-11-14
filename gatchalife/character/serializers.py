@@ -1,25 +1,30 @@
-from .models import Character, Variant, Attachment
+from .models import Character, CharacterVariant, VariantReferenceImage, Series
 from rest_framework import serializers
 
 
-class AttachmentSerializer(serializers.ModelSerializer):
+class VariantReferenceImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Attachment
-        fields = ["id", "name", "image"]
+        model = VariantReferenceImage
+        fields = ["id", "image"]
 
 
-class VariantSerializer(serializers.ModelSerializer):
-    images = AttachmentSerializer(many=True, read_only=True)
+class CharacterVariantSerializer(serializers.ModelSerializer):
+    images = VariantReferenceImageSerializer(many=True, read_only=True)
 
     class Meta:
-        model = Variant
+        model = CharacterVariant
         fields = ["id", "name", "description", "images"]
 
 
 class CharacterSerializer(serializers.ModelSerializer):
-    variants = VariantSerializer(many=True, read_only=True)
-    images = AttachmentSerializer(many=True, read_only=True)
+    variants = CharacterVariantSerializer(many=True, read_only=True)
+    images = VariantReferenceImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Character
         fields = ["id", "name", "description", "images", "variants"]
+        
+class SeriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Series
+        fields = ["id", "name", "description"]

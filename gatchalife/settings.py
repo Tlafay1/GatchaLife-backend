@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-j1ds+dp^u!$wkoj)l0(!%dz)qkn85cn^)k#4@bz^5h*eh)(f_r"
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
+    "django_filters",
+    "corsheaders",
     "gatchalife.character",
 ]
 
@@ -50,6 +52,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 ROOT_URLCONF = "gatchalife.urls"
@@ -71,10 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "gatchalife.wsgi.application"
 
-GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = (
-    "./gatchalife/personnal-apps-415107-6e84f4ea6b02.json"
-)
-
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
